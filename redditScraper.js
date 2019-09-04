@@ -1,5 +1,6 @@
 // const rp = require('request-promise');
 const puppeteer = require('puppeteer');
+const $ = require('cheerio');
 const url = 'https://www.reddit.com';
 
 puppeteer
@@ -13,8 +14,9 @@ puppeteer
         })
     })
     .then(function(html) {
-        console.log( html );
-        
+        $('h3', html).each(function() {
+            console.log( $(this).text() );
+        })
     })
     .catch(function(error) {
         console.log( `Something didn't work.`, error );
